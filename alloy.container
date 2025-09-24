@@ -1,0 +1,14 @@
+[Unit]
+Description=Alloy Container
+After=network-online.target
+
+[Container]
+Image=docker.io/grafana/alloy:latest
+Volume=alloy.conf:/etc/alloy:z
+PublishPort=12345:12345
+Environment=CONTAINER_NAME=alloy
+
+Exec=run --server.http.listen-addr=0.0.0.0:12345 --storage.path=/var/lib/alloy/data /etc/alloy/config.alloy
+
+[Install]
+WantedBy=multi-user.target
