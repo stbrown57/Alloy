@@ -7,13 +7,7 @@ discovery.relabel "integrations_node_exporter" {
     target_label = "instance"
     replacement  = constants.hostname
   }
-  
-  rule {
-        // Set the nodename label to the hostname of the machine for dashboard compatibility
-        target_label = "nodename"
-        replacement  = constants.hostname
-  }
-  
+
   rule {
     // Set a standard job name for all node_exporter metrics
     target_label = "job"
@@ -63,7 +57,7 @@ scrape_interval = "15s"
 prometheus.remote_write "local" {
   endpoint {
     // Send metrics to a locally running Prometheus instance
-    url = "http://192.168.1.35:9090/api/v1/write"
+    url = "http://prometheus:9090/api/v1/write"
   }
 }
 
@@ -132,10 +126,9 @@ loki.source.file "logs_integrations_integrations_node_exporter_direct_scrape" {
 loki.write "local" {
     endpoint {
         // Send logs to a locally running Loki instance
-        url ="http://192.168.1.35:3100/loki/api/v1/push"
+        url ="http://loki:3100/loki/api/v1/push"
     }
 }
 
 // Enable live debugging features (empty config means use defaults)
 livedebugging{}
-

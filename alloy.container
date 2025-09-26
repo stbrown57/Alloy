@@ -5,6 +5,7 @@ After=network-online.target
 [Container]
 Image=docker.io/grafana/alloy:latest
 Volume=alloy.conf:/etc/alloy:z
+Volume=/var/log/journal:/var/log/journal:z
 PublishPort=12345:12345
 Environment=CONTAINER_NAME=alloy
 
