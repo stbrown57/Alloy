@@ -57,7 +57,7 @@ scrape_interval = "15s"
 prometheus.remote_write "local" {
   endpoint {
     // Send metrics to a locally running Prometheus instance
-    url = "http://prometheus:9090/api/v1/write"
+    url = "http://192.168.1.35:9090/api/v1/write"
   }
 }
 
@@ -126,9 +126,10 @@ loki.source.file "logs_integrations_integrations_node_exporter_direct_scrape" {
 loki.write "local" {
     endpoint {
         // Send logs to a locally running Loki instance
-        url ="http://loki:3100/loki/api/v1/push"
+        url ="http://192.168.1.35:3100/loki/api/v1/push"
     }
 }
 
 // Enable live debugging features (empty config means use defaults)
 livedebugging{}
+
